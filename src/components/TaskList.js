@@ -1,57 +1,55 @@
 // ─────────────────────────────────────────────
 // TaskList — renders the array of task rows
-// What: dumb component, just maps data to UI.
+// What: dumb component — just maps data to UI.
 //       Doesn't know about filters, storage, or
-//       anything else — it renders whatever list
-//       it's given.
-// Type: Client Component (it's a descendant of
-//       one, so it shares that boundary).
-// Props: tasks    — array of { id, title, done }
+//       sorting. Renders whatever list it's given.
+// Type: Client Component (descendant of one).
+// Props: tasks    — array of task objects
 //        onToggle — callback(id), passed through
 //        onDelete — callback(id), passed through
+//        onEdit   — callback(id, updates), passed through
 // ─────────────────────────────────────────────
 'use client';
 
 import TaskCard from './TaskCard';
 
-export default function TaskList({ tasks, onToggle, onDelete }) {
-  // Empty state: if there's nothing to show, show
-  // a short message instead of rendering an empty
-  // <ul>. Stops the user from wondering if the app
-  // broke.
+export default function TaskList({ tasks, onToggle, onDelete, onEdit }) {
+  // Empty state: show a friendly message with an icon
+  // instead of an empty <ul>. Better UX than a blank
+  // space that makes the user wonder if it broke.
   if (tasks.length === 0) {
     return (
-      <p className="text-center text-neutral-500 dark:text-neutral-600 text-sm py-8">
-        Nothing here yet.
-      </p>
+      <div className="text-center py-12 text-neutral-400 dark:text-neutral-600">
+        <svg viewBox="0 0 24 24" className="mx-auto h-10 w-10 mb-2" fill="none"
+             stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="4" width="18" height="16" rx="2"/>
+          <path d="M8 2v4M16 2v4M3 10h18"/>
+        </svg>
+        <p className="text-sm">Nothing here yet.</p>
+        <p className="text-xs mt-1 opacity-75">Add a task above to get started.</p>
+      </div>
     );
   }
 
   return (
-    // <ul> is the right element for a list semantically.
-    // divide-y puts a thin line between rows without
-    // needing a border on each card — fits the
-    // minimal look.
-    <ul className="divide-y rounded-lg overflow-hidden
-                   divide-neutral-200 bg-neutral-50
-                   dark:divide-neutral-900 dark:bg-neutral-900/40">
+    // <ul> is semantically correct for a list. No
+    // dividers between cards anymore — each card now
+    // has its own spacing and priority accent bar, so
+    // dividers would fight with that.
+    <ul className="space-y-1.5">
       {tasks.map((task) => (
-        // key lets React keep track of each row across
-        // renders. I'm using task.id (a UUID) because
-        // it's stable — if I used the array index instead,
-        // React would get confused after a delete or
-        // reorder and end up showing stale stuff.
+        // key uses task.id (a stable UUID). Using the
+        // array index instead would confuse React after
+        // deletes/reorders and cause stale renders.
         <li key={task.id}>
           <TaskCard
-            id={task.id}
-            title={task.title}
-            done={task.done}
-            // Callbacks get forwarded straight through.
-            // TaskCard has no idea who actually handles
-            // the click — it just calls the function
-            // it was handed.
+            task={task}
+            // Callbacks forwarded straight through.
+            // TaskCard doesn't know who handles them —
+            // it just calls what it was given.
             onToggle={onToggle}
             onDelete={onDelete}
+            onEdit={onEdit}
           />
         </li>
       ))}

@@ -1,15 +1,15 @@
 // ─────────────────────────────────────────────
 // TaskStats — the counts + "Clear completed"
 // What: shows total / active / completed and a
-//       button to nuke all completed tasks. Every
+//       button to wipe all completed tasks. Every
 //       number is a prop — this component never
-//       does its own math, so the counts can't
-//       drift out of sync with the real list.
+//       does its own math, so counts can't drift
+//       out of sync with the real list.
 // Type: Client Component (needs onClick).
-// Props: total       — number of tasks
+// Props: total       — total tasks
 //        active      — not yet done
 //        completed   — done
-//        onClearDone — callback when "Clear" is tapped
+//        onClearDone — callback for the clear button
 // ─────────────────────────────────────────────
 'use client';
 
@@ -17,10 +17,9 @@ export default function TaskStats({ total, active, completed, onClearDone }) {
   return (
     <div className="mt-6 flex items-center justify-between text-xs text-neutral-500 dark:text-neutral-500">
 
-      {/* These update automatically because they come
-          in as fresh props every time TaskBoard
-          re-renders. They're derived values up there,
-          not their own state — that's the whole point. */}
+      {/* Live counts. They update automatically because
+          they're passed as fresh props every time
+          TaskBoard re-renders. Derived values, not state. */}
       <div className="flex gap-3">
         <span>{total} total</span>
         <span>·</span>
@@ -31,8 +30,7 @@ export default function TaskStats({ total, active, completed, onClearDone }) {
 
       {/* Conditional render: only show the button when
           there's actually something to clear. No point
-          showing a dead button the user can't use.
-          cursor-pointer so the mouse shows it's clickable. */}
+          showing a dead button the user can't use. */}
       {completed > 0 && (
         <button
           onClick={onClearDone}

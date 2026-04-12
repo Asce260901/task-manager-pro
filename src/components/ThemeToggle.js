@@ -51,15 +51,13 @@ export default function ThemeToggle() {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  // While we don't know the theme yet (first render
-  // on server + first render on client before the
-  // effect runs), render nothing. Stops the button
-  // from flashing the wrong icon for a split second.
+  // While we don't know the theme yet, render nothing.
+  // Stops the button from flashing the wrong icon.
   if (theme === null) return null;
 
   // Flip the theme. Functional setState form because
-  // the new value depends on the old value — safer
-  // than reading `theme` directly.
+  // the new value depends on the old one — safer than
+  // reading `theme` directly here.
   function toggle() {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
   }
@@ -73,17 +71,14 @@ export default function ThemeToggle() {
       className="cursor-pointer rounded-full p-2 text-neutral-600 hover:text-neutral-900
                  dark:text-neutral-400 dark:hover:text-neutral-100 transition-colors"
     >
-      {/* Conditional render: pick the icon based on
-          current theme. Sun icon when we're dark (tap
-          to go light), moon when we're light. */}
+      {/* Conditional render: sun when we're dark
+          (tap to go light), moon when we're light. */}
       {isDark ? (
-        // Sun
         <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="4"/>
           <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
         </svg>
       ) : (
-        // Moon
         <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
         </svg>
