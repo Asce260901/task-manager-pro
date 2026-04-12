@@ -15,7 +15,7 @@
 
 export default function TaskStats({ total, active, completed, onClearDone }) {
   return (
-    <div className="mt-6 flex items-center justify-between text-xs text-neutral-500">
+    <div className="mt-6 flex items-center justify-between text-xs text-neutral-500 dark:text-neutral-500">
 
       {/* These update automatically because they come
           in as fresh props every time TaskBoard
@@ -31,11 +31,13 @@ export default function TaskStats({ total, active, completed, onClearDone }) {
 
       {/* Conditional render: only show the button when
           there's actually something to clear. No point
-          showing a dead button the user can't use. */}
+          showing a dead button the user can't use.
+          cursor-pointer so the mouse shows it's clickable. */}
       {completed > 0 && (
         <button
           onClick={onClearDone}
-          className="text-neutral-400 hover:text-red-400 transition-colors"
+          className="cursor-pointer text-neutral-600 hover:text-red-500
+                     dark:text-neutral-400 dark:hover:text-red-400 transition-colors"
         >
           Clear completed
         </button>

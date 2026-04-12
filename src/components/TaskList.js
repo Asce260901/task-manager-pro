@@ -21,7 +21,7 @@ export default function TaskList({ tasks, onToggle, onDelete }) {
   // broke.
   if (tasks.length === 0) {
     return (
-      <p className="text-center text-neutral-600 text-sm py-8">
+      <p className="text-center text-neutral-500 dark:text-neutral-600 text-sm py-8">
         Nothing here yet.
       </p>
     );
@@ -32,7 +32,9 @@ export default function TaskList({ tasks, onToggle, onDelete }) {
     // divide-y puts a thin line between rows without
     // needing a border on each card — fits the
     // minimal look.
-    <ul className="divide-y divide-neutral-900 bg-neutral-900/40 rounded-lg overflow-hidden">
+    <ul className="divide-y rounded-lg overflow-hidden
+                   divide-neutral-200 bg-neutral-50
+                   dark:divide-neutral-900 dark:bg-neutral-900/40">
       {tasks.map((task) => (
         // key lets React keep track of each row across
         // renders. I'm using task.id (a UUID) because

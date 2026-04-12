@@ -17,8 +17,8 @@ export default function TaskCard({ id, title, done, onToggle, onDelete }) {
   // the task is done, so it's obvious at a glance.
   // Just a ternary picking between two class strings.
   const titleClasses = done
-    ? 'line-through text-neutral-600'
-    : 'text-neutral-100';
+    ? 'line-through text-neutral-400 dark:text-neutral-600'
+    : 'text-neutral-900 dark:text-neutral-100';
 
   return (
     // py-4 gives a bigger tap area — important on
@@ -27,21 +27,22 @@ export default function TaskCard({ id, title, done, onToggle, onDelete }) {
 
       {/* Toggle "checkbox". I'm using a button instead
           of a real <input type=checkbox> so I can style
-          it freely for the dark theme. aria-pressed
-          tells screen readers what state it's in. */}
+          it freely for both themes. aria-pressed tells
+          screen readers what state it's in.
+          cursor-pointer so the mouse signals clickable. */}
       <button
         aria-pressed={done}
         aria-label={done ? 'Mark as active' : 'Mark as done'}
         onClick={() => onToggle(id)}
-        className={`h-6 w-6 shrink-0 rounded-full border transition-colors
+        className={`cursor-pointer h-6 w-6 shrink-0 rounded-full border transition-colors
           ${done
             ? 'bg-emerald-500 border-emerald-500'
-            : 'border-neutral-600 hover:border-neutral-400'}`}
+            : 'border-neutral-400 hover:border-neutral-600 dark:border-neutral-600 dark:hover:border-neutral-400'}`}
       >
         {/* Conditional render: the checkmark only
             shows when done is true. */}
         {done && (
-          <svg viewBox="0 0 20 20" className="h-4 w-4 mx-auto text-neutral-950" fill="currentColor">
+          <svg viewBox="0 0 20 20" className="h-4 w-4 mx-auto text-white" fill="currentColor">
             <path d="M7.5 13.5l-3-3 1.4-1.4 1.6 1.6 4.6-4.6 1.4 1.4z"/>
           </svg>
         )}
@@ -61,8 +62,9 @@ export default function TaskCard({ id, title, done, onToggle, onDelete }) {
       <button
         aria-label="Delete task"
         onClick={() => onDelete(id)}
-        className="text-neutral-600 hover:text-red-400 transition-colors
-                   text-xl leading-none shrink-0 px-1"
+        className="cursor-pointer text-neutral-400 hover:text-red-500
+                   dark:text-neutral-600 dark:hover:text-red-400
+                   transition-colors text-xl leading-none shrink-0 px-1"
       >
         ×
       </button>

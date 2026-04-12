@@ -51,15 +51,17 @@ export default function AddTaskForm({ onAdd }) {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="What needs doing?"
-        className="flex-1 bg-neutral-900 text-neutral-100 placeholder:text-neutral-600
-                   rounded-lg px-4 py-3 outline-none
+        className="flex-1 rounded-lg px-4 py-3 outline-none
+                   bg-neutral-100 text-neutral-900 placeholder:text-neutral-400
+                   dark:bg-neutral-900 dark:text-neutral-100 dark:placeholder:text-neutral-600
                    focus:ring-1 focus:ring-emerald-500/60"
       />
       {/* type="submit" means Enter inside the input
-          triggers the form's onSubmit too. */}
+          triggers the form's onSubmit too.
+          cursor-pointer so the mouse shows it's clickable. */}
       <button
         type="submit"
-        className="bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600
+        className="cursor-pointer bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600
                    text-neutral-950 font-medium rounded-lg px-5 py-3
                    transition-colors"
       >

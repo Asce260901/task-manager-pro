@@ -13,12 +13,27 @@ import AddTaskForm from './AddTaskForm';
 import FilterBar   from './FilterBar';
 import TaskList    from './TaskList';
 import TaskStats   from './TaskStats';
+import ThemeToggle from './ThemeToggle';
 
 export default function TaskBoard() {
-// ── STATE ────────────────────────────────────
-// tasks goes in state because it changes based on user actions.
-// We use a lazy initializer to load from localStorage only once.
-// The typeof window check prevents crashes on the server (Next.js).
+  // ── STATE ────────────────────────────────────
+  // tasks has to live in state because the user
+  // creates it (typing, clicking) and the UI needs
+  // to re-render every time it changes. Nothing
+  // else to derive it from.
+  //
+  // Passing a function to useState (the "lazy
+  // initializer") means this code only runs on
+  // the very first render. Reading localStorage
+  // is slow-ish, no point doing it on every render.
+  //
+  // The typeof window check is here because Next.js
+  // renders components on the server first, and
+  // there's no `window` on the server. If we just
+  // called localStorage directly it would crash
+  // the build. On the server we return []; once
+  // the page hydrates in the browser, the real
+  // tasks come in.
   const [tasks, setTasks] = useState(() => {
     if (typeof window === 'undefined') return [];
     const saved = localStorage.getItem('tasks');
@@ -105,11 +120,16 @@ export default function TaskBoard() {
   // px-4 keeps the content off the edges on mobile.
   return (
     <div className="mx-auto w-full max-w-md px-4 py-10 sm:py-16">
-      <header className="mb-8">
-        <h1 className="text-3xl font-light tracking-tight">Tasks</h1>
-        <p className="mt-1 text-sm text-neutral-500">
-          Keep it simple. Get it done.
-        </p>
+      {/* Header row: title on the left, theme button
+          on the right. justify-between pushes them apart. */}
+      <header className="mb-8 flex items-start justify-between">
+        <div>
+          <h1 className="text-3xl font-light tracking-tight">Tasks</h1>
+          <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-500">
+            Keep it simple. Get it done.
+          </p>
+        </div>
+        <ThemeToggle />
       </header>
 
       {/* onAdd is the callback — when the form submits,

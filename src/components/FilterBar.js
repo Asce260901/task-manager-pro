@@ -25,7 +25,7 @@ export default function FilterBar({ filter, onChange }) {
       // role="tablist" tells screen readers these
       // buttons belong together as a group.
       role="tablist"
-      className="flex gap-1 mb-4 bg-neutral-900 p-1 rounded-lg"
+      className="flex gap-1 mb-4 p-1 rounded-lg bg-neutral-100 dark:bg-neutral-900"
     >
       {OPTIONS.map((opt) => {
         // Conditional render / styling: the active
@@ -34,8 +34,8 @@ export default function FilterBar({ filter, onChange }) {
         // with a ternary.
         const isActive = filter === opt.key;
         const classes = isActive
-          ? 'bg-neutral-800 text-neutral-100'
-          : 'text-neutral-500 hover:text-neutral-200';
+          ? 'bg-white text-neutral-900 shadow-sm dark:bg-neutral-800 dark:text-neutral-100'
+          : 'text-neutral-500 hover:text-neutral-900 dark:text-neutral-500 dark:hover:text-neutral-200';
 
         return (
           <button
@@ -46,7 +46,7 @@ export default function FilterBar({ filter, onChange }) {
             // new filter key. Parent owns the state,
             // we just raise our hand.
             onClick={() => onChange(opt.key)}
-            className={`flex-1 py-2 text-sm rounded-md transition-colors ${classes}`}
+            className={`cursor-pointer flex-1 py-2 text-sm rounded-md transition-colors ${classes}`}
           >
             {opt.label}
           </button>
