@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Task Manager Pro
 
-## Getting Started
+A full-featured task management web application built with **Next.js** and **React**. This project allows users to create, organize, prioritize, and track tasks with a clean and responsive interface.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Add & Delete Tasks** – Quickly create new tasks and remove completed or unwanted ones
+- - **Priority Levels** – Assign Low, Medium, or High priority to each task
+  - - **Due Dates** – Set deadlines and track upcoming tasks
+    - - **Inline Editing** – Edit task details directly without navigating away
+      - - **Filter & Search** – Filter tasks by status or priority using the FilterBar component
+        - - **Task Statistics** – View a live summary of total, completed, and pending tasks
+          - - **Dark/Light Theme Toggle** – Switch between themes for a personalized experience
+            - - **Responsive Design** – Works across desktop and mobile screens
+             
+              - ## Technologies Used
+             
+              - - [Next.js](https://nextjs.org/) – React framework for production
+                - - [React](https://react.dev/) – Component-based UI library
+                  - - [JavaScript (ES6+)](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Core programming language
+                    - - [CSS Modules / Tailwind CSS](https://tailwindcss.com/) – Styling and responsive layout
+                      - - [Node.js / npm](https://nodejs.org/) – Package management and dev environment
+                       
+                        - ## Project Structure
+                       
+                        - ```
+                          task-manager-pro/
+                          ├── src/
+                          │   ├── app/          # Next.js app router pages and layout
+                          │   └── components/   # Reusable React components
+                          │       ├── AddTaskForm.js    # Form for creating new tasks
+                          │       ├── FilterBar.js      # Filter tasks by status/priority
+                          │       ├── TaskBoard.js      # Main board layout
+                          │       ├── TaskCard.js       # Individual task card with inline edit
+                          │       ├── TaskList.js       # Renders list of TaskCards
+                          │       ├── TaskStats.js      # Summary statistics panel
+                          │       └── ThemeToggle.js    # Dark/light mode toggle
+                          ├── public/           # Static assets
+                          └── README.md
+                          ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+                          ## How to Run
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+                          1. **Clone the repository**
+                          2.    ```bash
+                                   git clone https://github.com/Asce260901/task-manager-pro.git
+                                   cd task-manager-pro
+                                   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+                                2. **Install dependencies**
+                                3.    ```bash
+                                         npm install
+                                         ```
 
-## Learn More
+                                      3. **Start the development server**
+                                      4.    ```bash
+                                               npm run dev
+                                               ```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+                                            4. **Open your browser** and navigate to [http://localhost:3000](http://localhost:3000)
+                                        
+                                            5. ## What I Learned
+                                        
+                                            6. Building this project helped me deepen my understanding of several key concepts:
+                                        
+                                            7. - **Component-based architecture** – Breaking a UI into small, reusable React components made the codebase easier to maintain and scale
+                                               - - **State management in React** – Managing task data, filters, and theme state across multiple components reinforced my understanding of useState and props
+                                                 - - **Next.js App Router** – Working with the App Router structure gave me hands-on experience with modern Next.js conventions
+                                                   - - **UI/UX thinking** – Designing features like inline editing and a theme toggle pushed me to think about the end-user experience, not just functionality
+                                                     - - **Professional project organization** – Structuring files into logical folders and writing clean, readable code prepared me for real-world development workflows
+                                                      
+                                                       - ## Author
+                                                      
+                                                       - **Alejandro Martinez**
+                                                       - Business Analytics & Information Systems | University of South Florida
+                                                       - [GitHub](https://github.com/Asce260901) • [LinkedIn](https://linkedin.com/in/alejandro-martinez-a079b0298)
